@@ -11,10 +11,12 @@ import page1 from './modules/page1'
 
 const {menu, events} = app;
 
-app.modules.push(main(app));
-app.modules.push(page1(app));
+import './exp/redux'
 
-app.start();
+// app.modules.push(main(app));
+// app.modules.push(page1(app));
+//
+// app.start();
 
 //require('./modules/content')(app)
 

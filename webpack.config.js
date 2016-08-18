@@ -13,7 +13,7 @@ const path = require('path'),
 module.exports = {
     entry: {
         app: './src/index',
-        vendors: ['jquery', 'bootstrap-css'],
+        vendors: ['jquery', 'redux', 'bootstrap-css'],
         "dev-server": 'webpack-dev-server/client?http://localhost:8080'
     },
     output: {
@@ -92,7 +92,7 @@ module.exports = {
     devServer: {
         contentBase: "./public",
         proxy: {
-            '/api/*': {
+            '/users': {
                 target: 'http://localhost:3000/',
                 secure: false
             }
@@ -100,6 +100,8 @@ module.exports = {
     },
     debug: true,
     devtool: 'source-map',
+
+
 };
 
 
