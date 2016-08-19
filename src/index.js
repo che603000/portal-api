@@ -11,7 +11,8 @@ import page1 from './modules/page1'
 
 const {menu, events} = app;
 
-import './exp/redux'
+//import './exp/redux'
+import './react'
 
 // app.modules.push(main(app));
 // app.modules.push(page1(app));
