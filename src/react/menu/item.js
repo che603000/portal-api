@@ -2,44 +2,41 @@
  * Created by alex on 19.08.2016.
  */
 
-import   React, {Component} from 'react'
-import { connect } from 'react-redux';
+import React, {Component} from "react";
+import {connect} from "react-redux";
 
 
 @connect(state => ({
-    activeId: state.activeId
+    hash: state.hash
 }))
 export default class Item extends Component {
     static get defaultProps() {
         return {
             href: '#',
             text: 'text',
-            activeId: ''
+            isNavigate: false
         }
     }
 
-    get classActive(){
-        //debugger;
-        const href= `${this.props.href}-${this.props.id}`;
-        return this.props.activeId === href? 'app-menu-active': '';
+    get classActive() {
+        return this.props.hash === this.props.href ? 'app-menu-active' : '';
     }
 
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     render() {
-        const href= `${this.props.href}-${this.props.id}`;
         return (
-            <li><a href={href} className={this.classActive} onClick={::this.onClick}>{this.props.text}</a></li>
+            <li><a href={this.props.href} className={this.classActive} onClick={::this.onClick}>{this.props.text}</a>
+            </li>
         )
     }
 
-    onClick(e){
-        //debugger;
-        //e.preventDefault();
-        //this.props.dispatch({type: 'MENU_ACTIVE', id: this.props.id})
-        console.log(this.props.text);
+    onClick(e) {
+        this.props.isNavigate && e.preventDefault();
+        //console.log(this.props.text);
     }
 }
 

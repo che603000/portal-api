@@ -23,3 +23,7 @@ html, body{
     text-align: justify;
     height: 100%;
 }
+
+.active {
+    font-weight: bold;
+}

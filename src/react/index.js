@@ -43,28 +43,35 @@ class App extends Component {
     }
 }
 
+const LOCATION = window.location,
+    ROOT = "#-111";
+
+
 const items = [
-    <Item key="1" active={true} id="111"></Item>,
-    <Item text="item2" key="2" id="222"></Item>
+    <Item key="1" href={ROOT}></Item>,
+    <Item key="2" text="item2" href="#-222"></Item>,
+    <Item key="3" text="Navigate" href="#-333"> isNavigate={false}></Item>
 ]
 
 
-let store = createStore((state={activeId :""}, active)=>{
-    switch (active.type){
+let store = createStore((state = {hash: ""}, active)=> {
+    switch (active.type) {
 
         case "MENU_ACTIVE":
-            return {...state, activeId: active.hash}
+            return {...state, hash: active.hash}
         default:
             return state;
     }
 })
 
 
-
-window.addEventListener('popstate', function(e){
-    const hs= window.location;
-    store.dispatch({type: "MENU_ACTIVE", hash: hs.hash})
+window.addEventListener('popstate', function (e) {
+    store.dispatch({type: "MENU_ACTIVE", hash: LOCATION.hash})
 }, false);
+
+setTimeout(()=> {
+    store.dispatch({type: "MENU_ACTIVE", hash: LOCATION.hash || ROOT})
+}, 0)
 
 ReactDOM.render(
     <Provider store={store}>

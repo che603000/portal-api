@@ -3,16 +3,16 @@
  */
 
 import "./index.css";
-import $ from "jquery";
-import app from "./site";
+//import $ from "jquery";
+//import app from "./site";
 
-import main from './modules/main'
-import page1 from './modules/page1'
+//import main from './modules/main'
+//import page1 from './modules/page1'
 
-const {menu, events} = app;
+//const {menu, events} = app;
 
 //import './exp/redux'
-import './react'
+import './route'
 
 // app.modules.push(main(app));
 // app.modules.push(page1(app));
