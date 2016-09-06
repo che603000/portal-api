@@ -56,7 +56,7 @@ export default function App({children}) {
             <header>
                 <ul>
                     <Item to="/home" activeClassName='active'>Home</Item>
-                    <Items to="/foo" onlyActiveOnIndex={true} activeClassName='active' text="Foo">
+                    <Items to="/foo" onlyActiveOnIndex={false} activeClassName='active' text="Foo">
                         <Item to="/foo/1" activeClassName='active'>Foo-1</Item>
                     </Items>
 
@@ -65,7 +65,7 @@ export default function App({children}) {
 
             </header>
             <div>
-                <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>
+                <button onClick={() => browserHistory.push('/bar/10')}>Go to /foo</button>
             </div>
             <div style={{marginTop: '1.5em'}}>{children}</div>
         </div>

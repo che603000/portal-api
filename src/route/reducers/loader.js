@@ -6,16 +6,18 @@ export default  function ({getState}) {
     return (next) => (action) => {
         switch (action.type) {
             case 'LOADING':
-                window.fetch(`/users`)
+                window.fetch(action.url)
                     .then(res=> {
                         if (res.ok)
-                            res.text().then(data=> {
-                                next({type: 'LOADED', text: data})
+                            res[action.mode]().then(data=> {
+                                next({type: 'LOADED', data, url: action.url})
                             })
+                        else
+                            throw res;
 
                     })
                     .catch(err=> {
-                        next({type: 'ERROR', err})
+                        next({type: 'ERROR', err, url: action.url})
                     })
 
         }

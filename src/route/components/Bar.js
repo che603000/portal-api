@@ -15,7 +15,19 @@ export class Content extends Component {
 
     componentWillMount(nextProps, nextState) {
         //debugger;
-        this.props.dispatch({type: "LOADING"})
+        this.props.dispatch({
+            type: "LOADING",
+            url: this.props.route.url
+        })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {content} = this.props;
+        if (content.status === 'loaded')
+            this.props.dispatch({
+                type: "LOADING",
+                url: this.props.route.url
+            })
     }
 
     render() {
@@ -23,15 +35,19 @@ export class Content extends Component {
         switch (content.status) {
             case 'loaded':
                 return <div>{content.text}</div>
+            case 'error':
+                return <div className="alert alert-danger">{content.error.statusText}</div>
             default:
                 return <div>Ждите</div>
         }
+    }
 
-
+    componentWillUnmount() {
+        console.log("unmount");
     }
 }
 
-export function contentReducer(state = {}, action) {
+export const contentReducer = (state = {}, action) => {
     switch (action.type) {
         case 'LOADING':
             return {status: 'loading'}
@@ -42,8 +58,8 @@ export function contentReducer(state = {}, action) {
             }
         case 'ERROR':
             return {
-                status: 'errpr',
-                err: action.err
+                status: 'error',
+                error: action.err
             }
         default:
             return state
