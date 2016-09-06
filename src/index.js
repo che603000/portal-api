@@ -3,70 +3,40 @@
  */
 
 import "./index.css";
-//import $ from "jquery";
-//import app from "./site";
 
-//import main from './modules/main'
-//import page1 from './modules/page1'
+import React from "react";
+import ReactDOM from "react-dom";
+import {Provider} from "react-redux";
+import {Router, Route, browserHistory} from "react-router";
+import {syncHistoryWithStore} from "react-router-redux";
 
-//const {menu, events} = app;
+import Site from "./site";
+import * as content from "./components/Content";
+import {createStore, addReducer} from "./store";
 
-//import './exp/redux'
-import './route'
+addReducer(content, {reducer:{test:(state)=>state}});
 
-// app.modules.push(main(app));
-// app.modules.push(page1(app));
-//
-// app.start();
-
-//require('./modules/content')(app)
+const store = createStore();
+const history = syncHistoryWithStore(browserHistory, store)
 
 
-// const _menu = menu($('#menu'), [
-//     {label: 'root0'},
-//     {label: 'root1'},
-//     {
-//         label: 'root2',
-//         href: '2'
-//     },
-//     {
-//         label: 'root3',
-//         items: [
-//             {label: 'root3-1'},
-//             {label: 'root3-2'},
-//             {label: 'root3-3'},
-//             {label: 'root3-4'},
-//         ]
-//     },
-// ])
-// _menu.render();
-//
-// events.on('menu:click',  console.log)
-
-//
-// fetch('/article/fetch/user.json')
-//     .then(function (response) {
-//         if (response.ok)
-//             return response;
-//         else
-//             throw `${response.status}: ${response.statusText}`
-//
-//     })
-//     // .then(function(user) {
-//     //     alert(user.name); // iliakan
-//     // })
-//     .catch(err=> {
-//         site.message.send({
-//             className: 'alert-danger',
-//             title: 'Http error',
-//             content: err,
-//             time: 2000
-//         });
-//     });
-
-
-// site.message.send({
-//     title: 'initial',
-//     content: 'Вернёт подмассив из всех элементов родительского, за исключением последнего. Довольно полезно при работе с объектом arguments. Если передан n, то возвращённый подмассив не будет содержать n последних элементов родительского.',
-//     time: 2000
-// });
+ReactDOM.render(
+    <Provider store={store}>
+        { /* Tell the Router to use our enhanced history 333*/ }
+        <Router history={history}>
+            <Route path="/" component={Site}>
+                {/*<IndexRedirect to='home' /> /!* INDEX REDIRECT *!/*/}
+                {/*<IndexRoute component={Home}/>*/}
+                <content.Route path="home" url="/api/page1"/>
+                {/*/!*{contentRoute(store, {path: 'home', url: "/api/page1"})}*!/*/}
+                {/*<Route path="foo" component={Foo}>*/}
+                {/*<Route path=":index" component={Foo}/>*/}
+                {/*</Route>*/}
+                <content.Route path="bar" url="/api/page2">
+                    <content.Route path=":index" url="/api/page3" mode="json"/>
+                </content.Route>
+            </Route>
+        </Router>
+    </Provider>,
+    document.getElementById('container')
+)

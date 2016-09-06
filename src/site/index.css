@@ -1,0 +1,20 @@
+#footer{
+    font-size: 10px;
+    color: #FFF;
+    background-color: #CCC;
+    padding: 10px;
+}
+
+#header{
+    background-color: #ABC;
+}
+#menu{
+    background-color: #CBA;
+}
+
+#content{
+    background-color: #CDA;
+    text-align: justify;
+    height: 100%;
+}
+
