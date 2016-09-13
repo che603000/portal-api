@@ -5,23 +5,32 @@ import {createStore, combineReducers, applyMiddleware} from "redux";
 import {routerReducer} from "react-router-redux";
 import middlewares from "./middlewares";
 
-let store = null,
-    reducers = {routing: routerReducer};
 
-const addReducer = ({reducer})=> {
-    if (reducer)
-        reducers = {...reducers, ...reducer};
+function createReducer(asyncReducers) {
+    return combineReducers({
+        routing: routerReducer,
+        ...asyncReducers
+    });
 }
 
-const create = ()=> {
+export default createStore(
+    createReducer(),
+    applyMiddleware.apply(null, middlewares)
+);
 
-    store = createStore(
-        combineReducers(reducers),
-        applyMiddleware.apply(null, middlewares)
-    )
+//store.syncReducers = {};
 
-    return store;
+
+export function addReducer(store, reducer) {
+    //console.log(reducer);
+    console.log(store);
+    // if (reducer)
+    //     store.syncReducers = {...store.syncReducers, ...reducer};
+    // console.log(store.syncReducers);
 }
 
-export  {store, create as createStore, addReducer}
+
+
+
+
 

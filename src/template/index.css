@@ -13,8 +13,12 @@
 }
 
 #content{
-    background-color: #CDA;
+    background-color: #EEE;
     text-align: justify;
-    height: 100%;
+    /*height: 100%;*/
+    padding: 5px;
 }
 
+.app-content {
+
+}

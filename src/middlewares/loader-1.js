@@ -1,11 +1,11 @@
 /**
  * Created by alex on 05.09.2016.
  */
-import {store} from "../store";
+import {store} from '../store'
 
-export const LOADING = '@@loader/LOADING';
-export const LOADED = '@@loader/LOADED';
-export const ERROR = '@@loader/ERROR';
+export const LOADING ='@@loader/LOADING';
+export const LOADED ='@@loader/LOADED';
+export const ERROR ='@@loader/ERROR';
 
 export const request = (props)=> {
     store.dispatch({
@@ -29,8 +29,8 @@ export default  function ({getState}) {
                             throw res;
 
                     })
-                    .catch(error=> {
-                        store.dispatch({type: ERROR, error, url: action.url})
+                    .catch(err=> {
+                        store.dispatch({type: ERROR, err, url: action.url})
                     })
         }
 
@@ -39,14 +39,4 @@ export default  function ({getState}) {
 }
 
 
-export const r = (SUCCESS, ERROR)=> {
-    return (next) => (action) => {
-        switch (action.type) {
-            case SUCCESS:
-                break;
-            case ERROR:
-                break;
 
-        }
-    }
-}

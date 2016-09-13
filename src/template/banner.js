@@ -2,7 +2,7 @@
  * Created by alex on 05.09.2016.
  */
 import React, {Component} from "react";
-import img from './imgres.jpg';
+import img from '../images/imgres.jpg';
 
 export default () => {
     return (

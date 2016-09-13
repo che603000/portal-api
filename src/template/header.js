@@ -17,7 +17,7 @@ export default ({children}) => {
 
                 </div>
                 <div  className="col-md-8">
-                    <button className="btn btn-default" onClick={() => {store.dispatch(btn)}}>Pover</button>
+                    {children}
                 </div>
             </div>
      )

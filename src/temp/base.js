@@ -13,7 +13,7 @@ export class BaseContent extends Component {
         return {
             View: (props)=><div>{props.data}</div>,
             Error: (props)=> <div className="alert alert-danger">{props.error.status} -- {props.error.statusText}</div>,
-            Wait: (props)=><div>Ждите</div>,
+            Request: (props)=><div>Ждите</div>,
         }
     }
 
@@ -33,8 +33,8 @@ export class BaseContent extends Component {
         return this.props.route.Error || this.props.Error;
     }
 
-    get Wait() {
-        return this.props.route.Wait || this.props.Wait;
+    get Request() {
+        return this.props.route.Request || this.props.Request;
     }
 
     constructor(props) {
@@ -73,7 +73,7 @@ export class BaseContent extends Component {
             case STATUS.ERROR:
                 return <this.Error error={error}/>
             default:
-                return <this.Wait/>
+                return <this.Request/>
         }
     }
 
@@ -84,7 +84,6 @@ export class Route extends BaseRoute {
         return {
             component: BaseContent,
             onEnter: function (nextState, replace) {
-
             }
         }
     }

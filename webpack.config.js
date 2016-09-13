@@ -13,8 +13,9 @@ const path = require('path'),
 module.exports = {
     entry: {
         app: './src/index',
-        vendors: ['jquery', 'redux', 'bootstrap-css'],
-        "dev-server": 'webpack-dev-server/client?http://localhost:8080'
+        vendors: ['jquery', 'bootstrap-css'],
+        //"dev-server": 'webpack-dev-server/client?http://localhost:8080'
+        "dev-server": './node_modules/webpack-dev-server/client?http://localhost:8080'
     },
     output: {
         publicPath: '/',
@@ -90,13 +91,23 @@ module.exports = {
     ],
 
     devServer: {
+        //!!!!!  использовать webpack-dev-server@1.12
+        inline: true,
         contentBase: "./public",
         proxy: {
             '/api/*': {
                 target: 'http://localhost:3000/',
                 secure: false
             }
-        }
+        },
+        setup: function(app) {
+            // Here you can access the Express app object and add your own custom middleware to it.
+            // For example, to define custom handlers for some paths:
+            app.get(/test|home|bar|foo/, function(req, res) {
+                res.redirect('/');
+            });
+
+        },
     },
     debug: true,
     devtool: 'source-map',
