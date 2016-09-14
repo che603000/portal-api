@@ -7,21 +7,20 @@ import {Route} from "react-router";
 
 import Template from "../template";
 
-import AppRoute from "../components/contents/load";
-
 import Page from "../components/contents/simple";
 import NotFound from "../components/contents/not-found";
 
 import menu from "./menu";
 import header from "./header";
 
-
+import {components} from './modules'
 
 export default (
     <Route path="/" component={Template} menu={menu} header={header}>
         {/*<IndexRedirect to='test' /> /!* INDEX REDIRECT *!/*/}
-        <AppRoute path="test" url="/api/page1" View={props=><h1>{props.data}</h1>}/>
-        <AppRoute path="home" component={Page}/>
+        {/*<AppRoute path="test" url="/api/page1" View={props=><h1>{props.data}</h1>}/>*/}
+        {components.RouteLoad({path:'test', url:"/api/page1"})}
+        <Route path="home" component={Page} content="Привет сайт"/>
         <Route path="*" component={NotFound}/>
         {/*<baseContent.Route path="test" url="/api/page1" cache={true} View={props=><h1>{props.data}</h1>}/>*/}
 

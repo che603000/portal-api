@@ -5,13 +5,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
 
-
 export  default class  extends Component {
-    // static get defaultState() {
-    //     return {
-    //         collapse: true
-    //     }
-    // }
 
     constructor(props) {
         super(props);

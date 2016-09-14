@@ -1,15 +1,14 @@
-/**
- * Created by Александр on 10.09.2016.
- */
+"use strict";
 
-import React, {Component} from "react";
+import React from "react";
 import {connect} from "react-redux";
-import BaseRoute, {REQUEST, ERROR, LOAD} from "../route";
+
+import {REQUEST, LOAD, ERROR} from './const'
 
 @connect(state => ({
     content: state.content
 }))
-class Content extends Component {
+export default class  extends React.Component {
     static get defaultProps() {
         return {
             View: (props)=><div>{props.data}</div>,
@@ -21,7 +20,7 @@ class Content extends Component {
 
     static get defaultState() {
         return {
-            status: REQUEST,
+            status: CONST.REQUEST,
             error: null,
             data: null
         }
@@ -39,16 +38,15 @@ class Content extends Component {
         return this.props.route.Request || this.props.Request;
     }
 
-
     render() {
         const {status, data, error, mode = 'text'} = this.props.content;
         switch (status) {
             case LOAD:
                 return (
-                    <div>
-                        <this.View data={data}/>
-                        {this.props.children}
-                    </div>
+                        <div>
+                            <this.View data={data}/>
+                            {this.props.children}
+                        </div>
                 )
             case ERROR:
                 return <this.Error error={error}/>
@@ -59,11 +57,3 @@ class Content extends Component {
 
 }
 
-export default class Route extends BaseRoute {
-    static get defaultProps() {
-        return {
-            ...BaseRoute.defaultProps,
-            component: Content,
-        }
-    }
-}

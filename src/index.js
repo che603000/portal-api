@@ -9,21 +9,17 @@ import {Provider} from "react-redux";
 import {Router, browserHistory} from "react-router";
 import {syncHistoryWithStore} from "react-router-redux";
 
-import store from "./store";
+import {routes, reducers, middlewares } from "./config";
 
-console.log(store);
+import {store, create} from "./store";
+create( reducers, middlewares)
 
-
-//const store = createStore();
+const element = document.getElementById('portal');
 const history = syncHistoryWithStore(browserHistory, store)
-
-import {routes} from './config'
-
-//createReducer();
 
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history} routes={routes}/>
     </Provider>,
-    document.getElementById('container')
+    element
 )

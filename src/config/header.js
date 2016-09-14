@@ -2,14 +2,11 @@
  * Created by alex on 13.09.2016.
  */
 
-import React from 'react'
+import React from "react";
 
-import {Button} from '../components/header'
+import {ButtonToolbar as Button} from '../modules/components'
 
-
-export default  (
-    <div>
-        <Button id="test" icon="search"/>
-        <Button id="test1" icon="plus"/>
-    </div>
-)
+export default  [
+    <Button id="test" key="1" icon="search"/>,
+    <Button id="test1" key="2" icon="plus"/>
+]

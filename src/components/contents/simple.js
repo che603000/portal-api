@@ -4,8 +4,8 @@
 
 import React from "react";
 
-export default (props)=>{
+export default (props)=> {
     return (
-        <div>Simple content...</div>
+        <div>{props.route.content}</div>
     )
 }
