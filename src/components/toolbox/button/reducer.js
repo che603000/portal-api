@@ -2,10 +2,10 @@
  * Created by alex on 14.09.2016.
  */
 
-import {CLICK} from './const'
+import {CLICK, FIELD} from './const'
 
 export default   {
-    header: (state = {}, action) => {
+    [FIELD]: (state = {}, action) => {
         const {type, ...params} = action;
         switch (type) {
             case CLICK:

@@ -2,8 +2,11 @@
  * Created by alex on 14.09.2016.
  */
 
+import {initialize} from "../components";
+import {initialize as plugins} from "../plugins";
+
 module.exports = {
-    modules: require("../modules"),
+    modules: initialize.concat(plugins),
     get reducers() {
         return this.modules
             .filter(module=>module.reducer)
@@ -11,13 +14,13 @@ module.exports = {
                 return {...res, ...module.reducer}
             }, {})
     },
-    get components() {
-        return this.modules
-            .filter(module=>module.default)
-            .reduce((res, module)=>(
-                {...res, [module.id]: module.default}), {}
-            )
-    },
+    // get components() {
+    //     return this.modules
+    //         .filter(module=>module.default)
+    //         .reduce((res, module)=>(
+    //             {...res, [module.id]: module.default}), {}
+    //         )
+    // },
     get middlewares() {
         return this.modules
             .filter(module=>module.middleware)

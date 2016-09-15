@@ -4,18 +4,18 @@
 
 import React from "react";
 import {connect} from "react-redux";
-import {store} from '../../store'
-import {CLICK} from './const'
+import {store} from '../../../store'
+import {CLICK, FIELD} from './const'
 
 @connect(state => ({
-    header: state.header
+    [FIELD]: state[FIELD]
 }))
 export default class extends React.Component {
 
     static get defaultProps() {
         return {
             className: 'btn btn-default',
-            header: {id: null}
+            [FIELD]: {id: null}
         }
     }
 
@@ -24,7 +24,7 @@ export default class extends React.Component {
     }
 
     get isActive() {
-        return this.props.id === this.props.header.id;
+        return this.props.id === this.props[FIELD].id;
     }
 
     get className() {

@@ -3,24 +3,30 @@
  */
 
 import React from "react";
-import {Route} from "react-router";
-
+import {Route, Redirect, IndexRedirect} from "react-router";
 import Template from "../template";
-
 import Page from "../components/contents/simple";
 import NotFound from "../components/contents/not-found";
-
 import menu from "./menu";
 import header from "./header";
+import RouteLoad from "../components/contents/route-load";
+import {List, View} from "../plugins/components";
 
-import {components} from './modules'
+//import {components} from './modules'
+
 
 export default (
     <Route path="/" component={Template} menu={menu} header={header}>
         {/*<IndexRedirect to='test' /> /!* INDEX REDIRECT *!/*/}
         {/*<AppRoute path="test" url="/api/page1" View={props=><h1>{props.data}</h1>}/>*/}
-        {components.RouteLoad({path:'test', url:"/api/page1"})}
+        {RouteLoad({path: 'test', url: "/api/page1"})}
+        <Route path="news">
+            <IndexRedirect to="page/0"/>
+            {RouteLoad({path: 'page/:index', View: List})}
+            {RouteLoad({path: ':index', View: View})}
+        </Route>
         <Route path="home" component={Page} content="Привет сайт"/>
+
         <Route path="*" component={NotFound}/>
         {/*<baseContent.Route path="test" url="/api/page1" cache={true} View={props=><h1>{props.data}</h1>}/>*/}
 

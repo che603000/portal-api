@@ -9,17 +9,18 @@ const path = require('path'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const publicPath = './server/public'
 
 module.exports = {
     entry: {
         app: './src/index',
         vendors: ['jquery', 'bootstrap-css'],
         //"dev-server": 'webpack-dev-server/client?http://localhost:8080'
-        "dev-server": './node_modules/webpack-dev-server/client?http://localhost:8080'
+        //"dev-server": './node_modules/webpack-dev-server/client?http://localhost:8080'
     },
     output: {
         publicPath: '/',
-        path: './public',
+        path: publicPath,
         filename: '[name].js'
     },
 
@@ -65,7 +66,7 @@ module.exports = {
 
     plugins: [
         new webpack.OldWatchingPlugin(),
-        new CleanWebpackPlugin('./public'),
+        new CleanWebpackPlugin(publicPath),
         new BowerWebpackPlugin({
             modulesDirectories: ["bower_components"],
             manifestFiles: ".bower.json",
@@ -75,11 +76,11 @@ module.exports = {
         }),
 
 
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "vendors",
-            //filename: "index.js",
-            minChunks: Infinity,
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: "common",
+        //     //filename: "index.js",
+        //     minChunks: Infinity,
+        // }),
         new HtmlWebpackPlugin({
             title: 'My App',
             filename: 'index.html',
@@ -91,9 +92,11 @@ module.exports = {
     ],
 
     devServer: {
-        //!!!!!  использовать webpack-dev-server@1.12
+        //!!!!!  использовать webpack-dev-server: 1.12
         inline: true,
-        contentBase: "./public",
+        //hot: true,
+        compress: true,
+        contentBase: publicPath,
         proxy: {
             '/api/*': {
                 target: 'http://localhost:3000/',
@@ -103,14 +106,19 @@ module.exports = {
         setup: function(app) {
             // Here you can access the Express app object and add your own custom middleware to it.
             // For example, to define custom handlers for some paths:
-            app.get(/test|home|bar|foo/, function(req, res) {
-                res.redirect('/');
+            app.get('/json', function(req, res) {
+                res.json({status: 'OK', message:'test json data'});
             });
 
         },
+        quiet: false,
+        noInfo: false,
+        //lazy: true,
+        historyApiFallback: true
+
     },
     debug: true,
-    devtool: 'source-map',
+    devtool: 'eval-source-map',
 
 
 };

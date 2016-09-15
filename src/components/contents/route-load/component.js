@@ -3,10 +3,10 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import {REQUEST, LOAD, ERROR} from './const'
+import {FIELD, REQUEST, LOAD, ERROR} from './const'
 
 @connect(state => ({
-    content: state.content
+    [FIELD]: state[FIELD]
 }))
 export default class  extends React.Component {
     static get defaultProps() {
@@ -14,13 +14,13 @@ export default class  extends React.Component {
             View: (props)=><div>{props.data}</div>,
             Error: (props)=> <div className="alert alert-danger">{props.error.status} -- {props.error.statusText}</div>,
             Request: (props)=><div>Ждите</div>,
-            content: {}
+            [FIELD]: {}
         }
     }
 
     static get defaultState() {
         return {
-            status: CONST.REQUEST,
+            status: REQUEST,
             error: null,
             data: null
         }
@@ -39,12 +39,13 @@ export default class  extends React.Component {
     }
 
     render() {
-        const {status, data, error, mode = 'text'} = this.props.content;
+        const {status, data, error, mode = 'text'} = this.props[FIELD];
+        const {params, route} = this.props;
         switch (status) {
             case LOAD:
                 return (
                         <div>
-                            <this.View data={data}/>
+                            <this.View params={params} route={route} data={data} />
                             {this.props.children}
                         </div>
                 )

@@ -15,6 +15,6 @@ export default  (
             <Item to="/foo/1">Foo-1</Item>
         </Items>
 
-        <Item to="/bar">Bar</Item>
+        <Item to="/news">Новости</Item>
     </div>
 )

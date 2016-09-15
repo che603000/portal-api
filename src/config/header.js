@@ -4,7 +4,7 @@
 
 import React from "react";
 
-import {ButtonToolbar as Button} from '../modules/components'
+import Button from '../components/toolbox/button'
 
 export default  [
     <Button id="test" key="1" icon="search"/>,
