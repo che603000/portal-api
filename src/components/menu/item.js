@@ -2,10 +2,11 @@ import React from "react";
 import {Link} from "react-router";
 
 
-export default  class extends Link {
+export default class extends Link {
 
     static get defaultProps() {
         return {
+            ...Link.defaultProps,
             activeClassName: 'app-menu-active'
         }
     }
@@ -18,5 +19,6 @@ export default  class extends Link {
         )
     }
 }
+
 
 

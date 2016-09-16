@@ -15,6 +15,9 @@ module.exports = {
     entry: {
         app: './src/index',
         vendors: ['jquery', 'bootstrap-css'],
+
+        //"WDS":  './node_modules/webpack-hot-middleware/client'
+        //vendors: ['jquery'],
         //"dev-server": 'webpack-dev-server/client?http://localhost:8080'
         //"dev-server": './node_modules/webpack-dev-server/client?http://localhost:8080'
     },
@@ -43,12 +46,13 @@ module.exports = {
                     presets: ['es2015', 'stage-0', 'react']
                 }
             },
-            {
-                test: /\.less$/,
-                loader: "style!css!autoprefixer!less"
-            },
+            // {
+            //     test: /\.less$/,
+            //     loader: "style!css!autoprefixer!less"
+            // },
             {
                 test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+                //test: /\.css$/, loader: ExtractTextPlugin.extract("style?name=css/[name].[hash].[ext]'!css")
             },
             {
                 test: /\.html$/, loader: "html"
@@ -56,22 +60,23 @@ module.exports = {
             //{test: /\.css$/, loader: "style?name=css/[name].[ext]'!css"},
             {test: /\.(woff2?|svg)$/, loader: 'url?limit=10000&name=fonts/[name].[ext]'},
             {test: /\.(ttf|eot)$/, loader: 'file?name=fonts/[name].[ext]'},
-            {test: /bootstrap-css.js/, loader: 'imports?jQuery=jquery'},
-            {test: /\.(png|jpg)$/, loader: "file?name=../src/images/[name].[ext]"},
+            //{test: /bootstrap-css.js/, loader: 'imports?jQuery=jquery'},
+            {test: /\.(png|jpg)$/, loader: "file?name=images/[name].[ext]"},
             //{test: /\.jade$/, loader: ExtractTextPlugin.extract("html!jade-html")},
-            {test: /\.jade$/, loader: "jade"}
+            //{test: /\.jade$/, loader: "jade"}
 
         ],
     },
 
     plugins: [
         new webpack.OldWatchingPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
         new CleanWebpackPlugin(publicPath),
         new BowerWebpackPlugin({
             modulesDirectories: ["bower_components"],
             manifestFiles: ".bower.json",
             includes: /.*/,
-            excludes: [],
+            excludes: [/bootstrap-css.js/],
             searchResolveModulesDirectories: true
         }),
 
@@ -86,7 +91,10 @@ module.exports = {
             filename: 'index.html',
             template: './src/index.html'
         }),
-        new ExtractTextPlugin("styles.css", {disable: true}),
+        new ExtractTextPlugin("css/[contenthash].css", {
+            allChunks: true,
+            disable: false
+        }),
 
 
     ],
@@ -94,7 +102,7 @@ module.exports = {
     devServer: {
         //!!!!!  использовать webpack-dev-server: 1.12
         inline: true,
-        //hot: true,
+        hot: true,
         compress: true,
         contentBase: publicPath,
         proxy: {
@@ -103,11 +111,11 @@ module.exports = {
                 secure: false
             }
         },
-        setup: function(app) {
+        setup: function (app) {
             // Here you can access the Express app object and add your own custom middleware to it.
             // For example, to define custom handlers for some paths:
-            app.get('/json', function(req, res) {
-                res.json({status: 'OK', message:'test json data'});
+            app.get('/json', function (req, res) {
+                res.json({status: 'OK', message: 'test json data'});
             });
 
         },
@@ -117,8 +125,9 @@ module.exports = {
         historyApiFallback: true
 
     },
-    debug: true,
-    devtool: 'eval-source-map',
+    //debug: true,
+    //devtool: 'source-map',
+    devtool: false
 
 
 };

@@ -7,3 +7,4 @@
 //export Plugin1 from './plugin1'
 //export Plugin2 from './plugin2'
 export {List, View} from './list'
+export Main from './main'

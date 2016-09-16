@@ -25,7 +25,6 @@ const Item = (props)=> {
 export class List extends React.Component {
     render() {
         const {data, params} = this.props;
-
         return (
             <div>
                 {data.map((d, i)=><Item index={i} data={d} params={params}  key={i}/>)}

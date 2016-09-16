@@ -5,16 +5,18 @@
 import {REQUEST, LOAD, ERROR} from "./const";
 import {get} from "../../../utils/loader";
 
+
 export default  function ({getState}) {
     return (next) => (action) => {
-        const {type, url} = action;
+        const {type, ...params} = action;
         switch (type) {
             case REQUEST:
-                get(action.url, (error, data)=> {
+                const url = `/api${action.pathname}`
+                get(url, (error, data)=> {
                     if (error)
-                        next({type: ERROR, error, url})
+                        next({type: ERROR, error, ...params})
                     else
-                        next({type: LOAD, data, url})
+                        next({type: LOAD, data, ...params})
                 })
 
             default:

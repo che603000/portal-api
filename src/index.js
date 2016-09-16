@@ -14,12 +14,12 @@ import {routes, reducers, middlewares } from "./config";
 import {store, create} from "./store";
 create( reducers, middlewares)
 
-const element = document.getElementById('portal');
+const ROOT_NODE = document.getElementById('portal');
 const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history} routes={routes}/>
     </Provider>,
-    element
+    ROOT_NODE
 )
