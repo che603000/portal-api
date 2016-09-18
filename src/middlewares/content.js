@@ -1,10 +1,8 @@
 /**
  * Created by alex on 05.09.2016.
  */
-//import {store} from "../store";
-import {REQUEST, LOAD, ERROR} from "./const";
-import {get} from "../../../utils/loader";
-
+import {REQUEST, LOAD, ERROR} from "../const";
+import {get} from "../utils/loader";
 
 export default  function ({getState}) {
     return (next) => (action) => {

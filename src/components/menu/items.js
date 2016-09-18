@@ -15,7 +15,7 @@ export  default class  extends Component {
     render() {
         const props = {...this.props},
             {text} = this.props,
-            items = this.state.collapse ? null : <ul>{this.props.children}</ul>;
+            items = this.state.collapse ? null : <ul className="nav-sidebar">{this.props.children}</ul>;
 
         delete props.text;
         return (

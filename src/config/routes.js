@@ -9,7 +9,7 @@ import Page from "../components/contents/simple";
 import NotFound from "../components/contents/not-found";
 import menu from "./menu";
 import header from "./header";
-import RouteLoad from "../components/contents/route-load";
+import RouteApp from "../components/route";
 import {List, View, Main} from "../plugins/components";
 
 //import {components} from './modules'
@@ -20,15 +20,15 @@ export default (
         <IndexRedirect to='news' /> {/* INDEX REDIRECT */}
         {/*<AppRoute path="test" url="/api/page1" View={props=><h1>{props.data}</h1>}/>*/}
         {/*<IndexRoute component={Main}/>*/}
-        <RouteLoad path="page1"/>
+        <RouteApp path="page1"/>
         <Route path="news">
             <IndexRedirect to="page/0"/>
-            <RouteLoad path='page/:index' View={List}/>
-            <RouteLoad path=":index" View={View}/>
+            <RouteApp path='page/:index' View={List}/>
+            <RouteApp path=":index" View={View}/>
         </Route>
-        <RouteLoad path="home" View={Page} content="Привет сайт" isStatic={true}/>
+        <RouteApp path="home" View={Page} content="Привет сайт" isStatic={true}/>
 
-        <RouteLoad path="*" View={NotFound} isStatic={true}/>
+        <RouteApp path="*" View={NotFound} isStatic={true}/>
         {/*<baseContent.Route path="test" url="/api/page1" cache={true} View={props=><h1>{props.data}</h1>}/>*/}
 
         {/*<baseContent.Route path="home" url="/api/page20" View={props=><h1>{props.data}</h1>}/>*/}

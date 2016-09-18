@@ -1,0 +1,8 @@
+a.app-toolbox-active > span.glyphicon {
+    color: greenyellow;
+}
+
+div.popover > button.close {
+    padding: 5px;
+    padding-right: 7px;
+}

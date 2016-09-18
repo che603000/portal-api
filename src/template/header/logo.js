@@ -6,8 +6,6 @@ import {Link} from "react-router";
 
 export default ({children}) => {
     return (
-        <div className="col-md-2">
-            <Link to="/"><h3>К+ #АПИ</h3></Link>
-        </div>
+        <Link className="navbar-brand" to="/">К+ #АПИ</Link>
     )
 }

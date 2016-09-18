@@ -5,7 +5,7 @@ const path = require('path'),
     webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     BowerWebpackPlugin = require("bower-webpack-plugin"),
-    SpritesmithPlugin = require('webpack-spritesmith'),
+    //SpritesmithPlugin = require('webpack-spritesmith'),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
     CleanWebpackPlugin = require('clean-webpack-plugin');
 
@@ -15,7 +15,6 @@ module.exports = {
     entry: {
         app: './src/index',
         vendors: ['jquery', 'bootstrap-css'],
-
         //"WDS":  './node_modules/webpack-hot-middleware/client'
         //vendors: ['jquery'],
         //"dev-server": 'webpack-dev-server/client?http://localhost:8080'
@@ -47,8 +46,8 @@ module.exports = {
                 }
             },
             // {
-            //     test: /\.less$/,
-            //     loader: "style!css!autoprefixer!less"
+            //     test: /\.scss$/,
+            //     loaders: ["style", "css", "sass"]
             // },
             {
                 test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")
@@ -70,7 +69,7 @@ module.exports = {
 
     plugins: [
         new webpack.OldWatchingPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
+        //new webpack.HotModuleReplacementPlugin(),
         new CleanWebpackPlugin(publicPath),
         new BowerWebpackPlugin({
             modulesDirectories: ["bower_components"],
@@ -102,7 +101,7 @@ module.exports = {
     devServer: {
         //!!!!!  использовать webpack-dev-server: 1.12
         inline: true,
-        hot: true,
+        //hot: true,
         compress: true,
         contentBase: publicPath,
         proxy: {
@@ -125,9 +124,9 @@ module.exports = {
         historyApiFallback: true
 
     },
-    //debug: true,
-    //devtool: 'source-map',
-    devtool: false
+    debug: true,
+    devtool: 'source-map',
+    //devtool: false
 
 
 };

@@ -1,7 +1,7 @@
 "use strict";
 
 import {Route} from "react-router";
-import {request} from "./reducer";
+import {request} from "../../reducers/content";
 import Component from "./component";
 
 export default  class extends Route {

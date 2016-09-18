@@ -10,17 +10,24 @@ import Content from "./content";
 import Banner from "./banner";
 import Footer from "./footer";
 
+import  {Popover} from '../components/overlays'
+import  FontIcon from '../components/simple/font-icon'
+
+
 export default function App(props) {
     const {menu, header, banner, footer} = props.route;
     return (
-        <div id="app" className="container-fluid" style={{height: '100%', display: ''}}>
+        <div>
             <Header>{header}</Header>
-            <div className="row">
-                <Menu>{menu}</Menu>
-                <Content>{props.children}</Content>
-                <Banner>{banner}</Banner>
+            <div id="app" className="container-fluid">
+                <div className="row">
+                    <Menu>{menu}</Menu>
+                    <Content>{props.children}</Content>
+                    <Banner>{banner}</Banner>
+                </div>
+                <Footer>{footer}</Footer>
+                <Popover/>
             </div>
-            <Footer>{footer}</Footer>
         </div>
     )
 }

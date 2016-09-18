@@ -1,29 +1,28 @@
 /**
  * Created by alex on 14.09.2016.
  */
+import reducers from '../reducers'
+import middlewares from '../middlewares'
 
-import {initialize} from "../components";
-import {initialize as plugins} from "../plugins";
+import {initialize} from "../plugins";
 
 module.exports = {
-    modules: initialize.concat(plugins),
+    modules: initialize,
     get reducers() {
-        return this.modules
+        const pluginReducers = this.modules
             .filter(module=>module.reducer)
             .reduce((res, module)=> {
                 return {...res, ...module.reducer}
-            }, {})
+            }, {});
+
+        return {...reducers, ...pluginReducers}
     },
-    // get components() {
-    //     return this.modules
-    //         .filter(module=>module.default)
-    //         .reduce((res, module)=>(
-    //             {...res, [module.id]: module.default}), {}
-    //         )
-    // },
+
     get middlewares() {
-        return this.modules
+        const pluginMiddlewares = this.modules
             .filter(module=>module.middleware)
             .map(module=> module.middleware)
+
+        return middlewares.concat(pluginMiddlewares);
     }
 }

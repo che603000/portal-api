@@ -1,7 +1,7 @@
 "use strict";
 
-import {store} from "../../../store";
-import {FIELD, REQUEST, LOAD, ERROR, REFRESH} from "./const";
+import {store} from "../store";
+import {FIELD, REQUEST, LOAD, ERROR} from "../const";
 
 export const request = (options, isStatic = false)=> {
     if (isStatic) {
@@ -14,9 +14,6 @@ export const request = (options, isStatic = false)=> {
     }
 }
 
-export const refresh = (options)=> {
-    store.dispatch({type: REFRESH})
-}
 
 export default {
     [FIELD]: (state = {}, action) => {
@@ -25,12 +22,7 @@ export default {
             case REQUEST:
             case LOAD:
             case ERROR:
-                //params.callback && setTimeout(params.callback);
                 return {status: type, ...params}
-            case REFRESH:
-                const {url, mode} = state;
-                request({url, mode})
-                return state;
             default:
                 return state;
         }

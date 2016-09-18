@@ -11,6 +11,7 @@ import {syncHistoryWithStore} from "react-router-redux";
 
 import {routes, reducers, middlewares } from "./config";
 
+
 import {store, create} from "./store";
 create( reducers, middlewares)
 

@@ -3,5 +3,6 @@
  */
 
 import loger from './loger'
+import content from './content'
 
-export default [loger]
+export default [content, loger]

@@ -7,10 +7,8 @@ import {Item, Items} from '../components/menu'
 
 export default ({children}) => {
     return (
-        <div id="menu" className="col-md-2">
-            <ul>
-                {children}
-            </ul>
+        <div id="menu" className="col-sm-3 col-md-2 sidebar">
+            {children}
         </div>
     )
 }
