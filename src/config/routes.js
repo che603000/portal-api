@@ -20,8 +20,8 @@ export default (
         <IndexRedirect to='news' /> {/* INDEX REDIRECT */}
         {/*<AppRoute path="test" url="/api/page1" View={props=><h1>{props.data}</h1>}/>*/}
         {/*<IndexRoute component={Main}/>*/}
-        <Route path="foo">
-            <RouteApp path=":index" View={Page} content="Привет сайт" isStatic={true}/>
+        <Route path="foo" View={Page} content="root foo" isStatic={true}>
+            <RouteApp path=":index" View={Page} content="11111111111111111" isStatic={true}/>
         </Route>
         <RouteApp path="page1"/>
         <Route path="news">

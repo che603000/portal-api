@@ -10,8 +10,8 @@ import {Items, Item} from "../components/menu";
 export default  (
     <ul className="nav nav-sidebar">
         <Item to="/page1">Page 1</Item>
+        <Item to="/home">Home</Item>
         <Items to="/foo" text="Foo">
-            <Item to="/home">Home</Item>
             <Item to="/foo/1">Foo-1</Item>
         </Items>
         <Item to="/news">Новости</Item>

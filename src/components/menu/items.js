@@ -3,63 +3,30 @@
  */
 
 import React, {Component} from "react";
-import {IndexLink, Link} from "react-router";
-//import {routerShape} from "react-router/propTypes";
+import {Link, withRouter} from "react-router";
 
-
-class AppIndexLink extends Link {
-
-    componentDidUpdate(prevProps, prevState){
-        super.componentDidUpdate(prevProps, prevState);
-        this.onActive();
-    }
-
-    onActive = ()=> {
-        if(this.props.onActive) {
-            const {to, query, hash, state, activeClassName, activeStyle, onlyActiveOnIndex, ...props} = this.props
-            const {router} = this.context
-            this.props.onActive(router.isActive(to));
-        }
-    }
-
-    render() {
-        console.log('appIndex', this.props, this.context);
-        return super.render();
-    }
-}
-
-
+@withRouter // подключаем компонент к роутеру
 export default class extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {collapse: true}
-    }
+    state = {collapse: true}
 
-    onActive = (isActive) =>{
-        // setTimeout(()=>{
-        //     this.setState({collapse: isActive});
-        // })
-
+    componentDidMount() {
+        const {to, router} = this.props;
+        this.setState({collapse: !router.isActive(to)})
     }
 
     render() {
-        const {text, children, ...props} = this.props;
-
-        //console.log(this.props);
-
+        const {text, router, children, ...props} = this.props;
         return (
             <li>
-                <AppIndexLink {...props} onClick={this.onClick} onlyActiveOnIndex={false} onActive={this.onActive}>
-                    {text}
-                </AppIndexLink>
-                {this.state.collapse ? null : <ul className="nav-sidebar">{children}</ul>}
+                <a href="#" onClick={this.onClick}>{text}</a>
+                {this.state.collapse ? null : <ul className="app-menu-sub">{children}</ul>}
             </li>
         )
     }
 
     onClick = (e) => {
+        e.preventDefault();
         this.setState({collapse: !this.state.collapse});
-        //console.log(this.active);
     }
 }
