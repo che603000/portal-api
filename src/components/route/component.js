@@ -11,7 +11,17 @@ export default class  extends React.Component {
     static get defaultProps() {
         return {
             View: (props)=><div>{props.data}</div>,
-            Error: (props)=> <div className="alert alert-danger">{props.error.status} -- {props.error.statusText}</div>,
+            Error: (props)=> (
+                <div className="alert alert-danger" style={{margin:30}}>
+                    Status: <code> {props.error.status} </code>
+                    <br/>
+                    Message: <code> {props.error.responseJSON.message}</code>
+                    <hr/>
+                    <pre>
+                        {props.error.responseJSON.stack}
+                    </pre>
+                </div>
+            ),
             Request: (props)=><div>{props.text || 'Loading...'}</div>,
             [FIELD]: {}
         }
@@ -57,7 +67,7 @@ export default class  extends React.Component {
 }
 
 /*
-import {request} from "../../reducers/content";
+ import {request} from "../../reducers/content";
  componentWillMount() {
  const {location:{pathname}, route:{isStatic, mode}} = this.props;
  request(this.props.dispatch, {pathname, mode}, isStatic);
@@ -69,4 +79,4 @@ import {request} from "../../reducers/content";
  if (location.pathname !== pathname)
  request(this.props.dispatch, {pathname: location.pathname, mode}, isStatic);
  }
-*/
+ */
