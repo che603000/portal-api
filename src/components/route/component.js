@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {FIELD, LOAD, ERROR, REQUEST} from "../../const";
 
 @connect(state => ({
-    [FIELD]: state[FIELD]
+    [FIELD]: state[FIELD],
 }))
 export default class  extends React.Component {
     static get defaultProps() {
@@ -56,3 +56,17 @@ export default class  extends React.Component {
     }
 }
 
+/*
+import {request} from "../../reducers/content";
+ componentWillMount() {
+ const {location:{pathname}, route:{isStatic, mode}} = this.props;
+ request(this.props.dispatch, {pathname, mode}, isStatic);
+ }
+
+ componentWillReceiveProps(nextProps) {
+ const {route:{isStatic, mode}, location} = nextProps;
+ const {status, pathname} = nextProps[FIELD];
+ if (location.pathname !== pathname)
+ request(this.props.dispatch, {pathname: location.pathname, mode}, isStatic);
+ }
+*/

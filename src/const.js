@@ -8,5 +8,9 @@ export const REQUEST = '@@content/REQUEST'
 export const LOAD = '@@content/LOAD'
 export const ERROR = '@@content/ERROR'
 
-export const FIELD_TOOLBOX = 'toolbox'
-export const CLICK = '@@toolbox/CLICK'
+export const HEADER_TOOLBOX = 'toolbox'
+export const HEADER_TOOLBOX_CLICK = '@@toolbox/HEADER_TOOLBOX_CLICK'
+
+
+export const FIELD_NAVIGATION ='navigation'
+export const COLLAPSE = '@@navigation/COLLAPSE'

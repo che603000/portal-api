@@ -5,12 +5,11 @@
 import React from "react";
 import ReactDOM from 'react-dom'
 import {connect} from "react-redux";
-import {store} from '../../store'
-import {CLICK, FIELD_TOOLBOX as FIELD} from '../../const'
+import {HEADER_TOOLBOX_CLICK as CLICK, HEADER_TOOLBOX as FIELD} from '../../const'
 
 @connect(state => ({
     [FIELD]: state[FIELD]
-}))
+} ))
 export default class extends React.Component {
 
     static get defaultProps() {
@@ -41,12 +40,12 @@ export default class extends React.Component {
 
     onClick = (e) => {
         if (this.isActive)
-            store.dispatch({
+            this.props.dispatch({
                 type: CLICK,
                 id: null
             })
         else
-            store.dispatch({
+            this.props.dispatch({
                 type: CLICK,
                 id: this.props.id,
                 popover: this.props.popover,
@@ -55,7 +54,7 @@ export default class extends React.Component {
     }
 
     onResize = (e) => {
-        store.dispatch({
+        this.props.dispatch({
             type: CLICK,
             id: this.props.id,
             popover: this.props.popover,

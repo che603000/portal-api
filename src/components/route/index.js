@@ -1,19 +1,22 @@
 "use strict";
 
+import React from "react";
 import {Route} from "react-router";
-import {request} from "../../reducers/content";
 import Component from "./component";
+import {request} from "../../reducers/content";
+
 
 export default  class extends Route {
     static get defaultProps() {
         return {
             component: Component,
-            onEnter: function (nextState, replace) {
-                const {mode = 'text', isStatic = false} =this,
-                    {location} =nextState;
-
-                request({pathname: location.pathname, mode}, isStatic);
+            mode: 'text',
+            isStatic: false,
+            onEnter: function ({location:{pathname}}, replace) {
+                const {mode, isStatic} = this;
+                request({pathname, mode}, isStatic);
             }
         }
     }
+
 }

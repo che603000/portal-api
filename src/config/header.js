@@ -3,10 +3,8 @@
  */
 
 import React from "react";
-
-
-import {Panel, Button, Popover} from '../components/toolbox'
-import {Form, Field, FontIcon} from '../components/simple'
+import {Panel, Button, Popover} from "../components/toolbox";
+import {Form, Field, FontIcon} from "../components/simple";
 
 const OFFSET_Y = -20;
 

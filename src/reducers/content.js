@@ -1,14 +1,14 @@
 "use strict";
 
-import {store} from "../store";
+import {dispatch} from "../store";
 import {FIELD, REQUEST, LOAD, ERROR} from "../const";
 
-export const request = (options, isStatic = false)=> {
+export const request = ( options, isStatic = false)=> {
     if (isStatic) {
-        store.dispatch({type: LOAD, ...options})
+        dispatch({type: LOAD, ...options})
     } else {
         if (options.pathname)
-            store.dispatch({type: REQUEST, ...options})
+            dispatch({type: REQUEST, ...options})
         else
             throw  'url not default...'
     }

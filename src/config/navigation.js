@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import {Items, Item} from "../components/menu";
+import {Items, Item} from "../components/navigation";
 
 
 export default  (

@@ -3,24 +3,18 @@
  */
 
 import {createStore, combineReducers, applyMiddleware} from "redux";
-let _store = null;
 
-module.exports = {
-    get store() {
-        return _store;
-    },
-    create(reducers, middlewares = [], initState){
-        _store = createStore(
-            combineReducers({...reducers}),
-            applyMiddleware.apply(null, middlewares),
-            initState
-        )
-        return _store;
-    }
+let _store;
+
+export default (reducers, middlewares = [], initState)=> {
+    return _store = createStore(
+        combineReducers({...reducers}),
+        applyMiddleware.apply(null, middlewares),
+        initState
+    )
 }
 
-
-
-
-
+export function dispatch(action) {
+    return _store.dispatch(action);
+}
 

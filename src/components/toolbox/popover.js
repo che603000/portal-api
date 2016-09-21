@@ -3,9 +3,10 @@
  */
 
 import React from 'react'
-import {store} from '../../store'
-import {CLICK, FIELD_TOOLBOX as FIELD} from '../../const'
+import {connect} from 'react-redux'
+import {HEADER_TOOLBOX_CLICK as CLICK, HEADER_TOOLBOX as FIELD} from '../../const'
 
+@connect(state=>{return {}})
 export default  class Popover extends React.Component {
     static get defaultProps() {
         return {
@@ -15,7 +16,7 @@ export default  class Popover extends React.Component {
     }
 
     onClick = (e)=> {
-        store.dispatch({
+        this.props.dispatch({
             type: CLICK,
             id: null
         })
